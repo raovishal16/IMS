@@ -1,0 +1,71 @@
+.sidemenu {
+  position: fixed;
+  top: 56px;
+  left: 0;
+  background-color: #f8f9fa;
+  width: 14%;
+  height: calc(100vh - 56px);
+  z-index: 100;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.logoimg1 {
+  width: 23%;
+}
+.close-btn {
+  color: #333;
+  background-color: transparent;
+  border: none;
+}
+
+.user-img img {
+  width: 60px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.username p {
+  color: #333;
+}
+.sider-menu {
+  padding: 5px 20px;
+}
+.sider-menu li {
+  display: block;
+  color: #333;
+  border-radius: 12px;
+  padding: 10px 5px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.sider-menu li:hover {
+  background-color: #d4d8dd;
+}
+
+.user-petamenu ul {
+  list-style: none;
+}
+
+.sider-menu li.active {
+  background-color: #712cf9;
+  color: #f8f9fa;
+}
+
+/* .user-petamenu ul {
+  padding-left: 20px;
+} */
+
+.user-petamenu ul li {
+  padding: 10px 5px;
+  margin: 4px 0px;
+  cursor: pointer;
+}
+
+.user-petamenu ul li.active {
+  background-color: #712cf9;
+  color: #f8f9fa;
+}

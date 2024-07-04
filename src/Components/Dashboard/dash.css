@@ -1,0 +1,22 @@
+.dashboard {
+  padding: 2% 15%;
+}
+
+.dashboard.with-sidebar .col-md-3 {
+  flex: 0 0 270px; /* Fixed width for sidebar */
+}
+
+.dashboard.with-sidebar .col-md-9 {
+  flex: 1; /* Fill remaining width */
+}
+
+@media (max-width: 991.98px) {
+  .dashboard {
+    flex-direction: column; /* Stack items vertically on medium devices */
+  }
+
+  .dashboard.with-sidebar .col-md-3 {
+    flex: none; /* Allow sidebar to shrink on medium devices */
+    width: 100%; /* Full width for sidebar */
+  }
+}
