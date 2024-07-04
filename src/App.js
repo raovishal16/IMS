@@ -25,7 +25,7 @@ function App() {
         <Route path='/courceContent/addcource' element={<AddCourseConten />} />
         <Route path='/courceContent/viewcource' element={<ViewCourseContent />} />
         <Route path='/admission/addstudent' element={<AddStudent />} />
-        <Route path='/' element={<Login />} />
+        {/* <Route path='/' element={<Login />} /> */}
       </Routes>
     </>
   );
