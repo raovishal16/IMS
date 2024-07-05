@@ -77,7 +77,7 @@ const Register = () => {
                   value={adminPass}
                   onChange={(e) => setAdminPass(e.target.value)}
                 />
-                <div className="show-psw mt-2 px-1">
+                <div className="show-psw mt-2 px-1 d-flex align-items-center gap-1">
                   <input
                     type="checkbox"
                     name=""
