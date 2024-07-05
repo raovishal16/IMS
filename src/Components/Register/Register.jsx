@@ -1,27 +1,41 @@
-import React, { useEffect, useState } from 'react'
-import './register.css'
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import "./register.css";
 const Register = () => {
-  let [adminName,setAdminName] = useState('')
-  let [adminEmail,setAdminEmail] = useState('')
-  let [adminPass,setAdminPass] = useState('')
-  let [adminContact,setAdminContact] = useState('')
-  let [isShow,setIsShow] = useState(false)
+  let [adminName, setAdminName] = useState("");
+  let [adminEmail, setAdminEmail] = useState("");
+  let [adminPass, setAdminPass] = useState("");
+  let [adminContact, setAdminContact] = useState("");
+  let [isShow, setIsShow] = useState(false);
+  let [adminRegisterData, setAdminRegisterData] = useState([]);
+  let admin_data = {
+    admin_name: adminName,
+    admin_email: adminEmail,
+    admin_pass: adminPass,
+    contact: adminContact,
+  };
+  const onShowPsw = () => {
+    setIsShow(!isShow);
+  };
 
-  useEffect(() => {
-    showPassword()
-  }, [])
   const onAddAdmin = () => {
-
-  }
-
-  const  showPassword = () => {
-    setIsShow(true)
-    console.log(isShow,'+++');
-  }
+    axios
+      .post("http://localhost:3000/auth/register")
+      .then(function (response) {
+        // console.log([...adminRegisterData, admin_data], "*-*-*-*");
+        console.log(response,'++++');
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+      .finally(function () {
+        // always executed
+      });
+  };
 
   return (
     <>
-         <div className="dashboard">
+      <div className="dashboard">
         <div className="adduser d-flex justify-content-center align-items-center w-100">
           <div className="login-card  border-0 my-5">
             <div className="card-header">
@@ -37,7 +51,7 @@ const Register = () => {
                   className="form-control"
                   placeholder="Enter Name..."
                   value={adminName}
-                  onChange={(e)=> setAdminName(e.target.value)}
+                  onChange={(e) => setAdminName(e.target.value)}
                 />
               </div>
               <div className="mb-3">
@@ -49,8 +63,7 @@ const Register = () => {
                   className="form-control"
                   placeholder="Enter Email..."
                   value={adminEmail}
-                  onChange={(e)=> setAdminEmail(e.target.value)}
-
+                  onChange={(e) => setAdminEmail(e.target.value)}
                 />
               </div>
               <div className="mb-4">
@@ -58,40 +71,49 @@ const Register = () => {
                   Password
                 </label>
                 <input
-                  type="password"
+                  type={isShow ? "text" : "password"}
                   className="form-control"
                   placeholder="Enter Password..."
                   value={adminPass}
-                  onChange={(e)=> setAdminPass(e.target.value)}
-
+                  onChange={(e) => setAdminPass(e.target.value)}
                 />
-                <div className="show-psw mt-2 px-1" >
-                  <input type="checkbox" name="" value={isShow} id="" onChange={(e)=>setIsShow(e.target.checked)} /> <label htmlFor="" className='show-psw-label'>Show Password</label>
+                <div className="show-psw mt-2 px-1">
+                  <input
+                    type="checkbox"
+                    name=""
+                    value={isShow}
+                    id=""
+                    onChange={(e) => onShowPsw(e.target.checked)}
+                  />{" "}
+                  <label htmlFor="" className="show-psw-label">
+                    {isShow ? "Hide" : "Show"} Password
+                  </label>
                 </div>
               </div>
               <div className="mb-3">
                 <label htmlFor="number" className="form-label fw-semibold">
-                 Contact-Number
+                  Contact-Number
                 </label>
                 <input
                   type="tel"
                   className="form-control"
                   placeholder="Enter Contact-Number..."
-                  inputMode='numeric'
+                  inputMode="numeric"
                   value={adminContact}
-                  onChange={(e)=> setAdminContact(e.target.value)}
-
+                  onChange={(e) => setAdminContact(e.target.value)}
                 />
               </div>
               <div className="mt-3">
-                <button className="user-btn" onClick={onAddAdmin()}>Register</button>
+                <button className="user-btn" onClick={() =>onAddAdmin()}>
+                  Register
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;
