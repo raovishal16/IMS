@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./register.css";
+import { Link, useNavigate } from "react-router-dom";
 const Register = () => {
   let [adminName, setAdminName] = useState("");
   let [adminEmail, setAdminEmail] = useState("");
@@ -14,23 +15,27 @@ const Register = () => {
     admin_pass: adminPass,
     contact: adminContact,
   };
+  let nav = useNavigate();
   const onShowPsw = () => {
     setIsShow(!isShow);
   };
 
   const onAddAdmin = () => {
     axios
-      .post("http://localhost:3000/auth/register")
+      .post("http://localhost:3000/auth/register", admin_data)
       .then(function (response) {
-        // console.log([...adminRegisterData, admin_data], "*-*-*-*");
-        console.log(response,'++++');
+        // console.log(response.data.admin_name, "++++");
+        // localStorage.setItem(
+        //   "admin_name",
+        //   JSON.stringify(response.data.admin_name)
+        // );
+        setAdminRegisterData([...adminRegisterData, response.data]);
       })
       .catch(function (error) {
         console.log(error);
-      })
-      .finally(function () {
-        // always executed
       });
+    console.log(adminRegisterData, "++++++");
+    nav("/login");
   };
 
   return (
@@ -103,10 +108,15 @@ const Register = () => {
                   onChange={(e) => setAdminContact(e.target.value)}
                 />
               </div>
-              <div className="mt-3">
-                <button className="user-btn" onClick={() =>onAddAdmin()}>
+              <div className="mt-3 d-flex justify-content-center w-100">
+                <button className="user-btn" onClick={() => onAddAdmin()}>
                   Register
                 </button>
+              </div>
+              <div className="d-flex justify-content-center w-100 mt-2">
+                <p>
+                  Already registered? <Link to="/login">Login here</Link>
+                </p>
               </div>
             </div>
           </div>

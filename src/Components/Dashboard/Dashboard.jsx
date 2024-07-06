@@ -1,11 +1,11 @@
 import React from "react";
 import "./dash.css";
 import PathofCrumb from "../Navigate/PathofCrumb";
-import Header from '../Header/Header'
+// import Header from '../Header/Header'
 const Dashboard = () => {
   return (
     <>
-    <Header/>
+      {/* <Header/> */}
       <div className="dashboard">
         <div>
           <PathofCrumb name="Dashboard" crumb="Dashboard" />

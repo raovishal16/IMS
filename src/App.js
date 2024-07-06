@@ -17,18 +17,18 @@ function App() {
     <>
       {/* <Header /> */}
       <Routes>
-      <Route path='/register' element={<Register/>} />
-      <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/login' element={<Login />} />
 
         <Route element={ProtectedRoutes}>
-        <Route path='/' element={<Dashboard />} />
-        <Route path='/user/adduser' element={<AddUser />} />
-        <Route path='/user/viewuser' element={<ViewUser />} />
-        <Route path='/manageCource/addcource' element={<AddCourse />} />
-        <Route path='/manageCource/viewcource' element={<ViewCourse />} />
-        <Route path='/courceContent/addcource' element={<AddCourseConten />} />
-        <Route path='/courceContent/viewcource' element={<ViewCourseContent />} />
-        <Route path='/admission/addstudent' element={<AddStudent />} />
+          <Route path='/' element={<Dashboard />} />
+          <Route path='/user/adduser' element={<AddUser />} />
+          <Route path='/user/viewuser' element={<ViewUser />} />
+          <Route path='/manageCource/addcource' element={<AddCourse />} />
+          <Route path='/manageCource/viewcource' element={<ViewCourse />} />
+          <Route path='/courceContent/addcource' element={<AddCourseConten />} />
+          <Route path='/courceContent/viewcource' element={<ViewCourseContent />} />
+          <Route path='/admission/addstudent' element={<AddStudent />} />
         </Route>
       </Routes>
 

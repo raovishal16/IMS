@@ -1,6 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import "./login.css";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const Login = () => {
+  let [adminLoginEmail, setAdminLoginEmail] = useState("");
+  let [adminLoginPass, setAdminLoginPass] = useState("");
+  let adminLoginData = {
+    admin_email: adminLoginEmail,
+    admin_pass: adminLoginPass,
+  };
+  let nav = useNavigate();
+  const onLoginUser = () => {
+    axios
+      .post("http://localhost:3000/auth/admin_login", adminLoginData)
+      .then(function (response) {
+        // console.log(response.data.token, "++++");
+        localStorage.setItem("token", JSON.stringify(response.data.token));
+        nav("/");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
   return (
     <>
       <div className="dashboard">
@@ -18,6 +39,8 @@ const Login = () => {
                   type="email"
                   className="form-control"
                   placeholder="Enter Email..."
+                  value={adminLoginEmail}
+                  onChange={(e) => setAdminLoginEmail(e.target.value)}
                 />
               </div>
               <div className="mb-4">
@@ -28,10 +51,14 @@ const Login = () => {
                   type="password"
                   className="form-control"
                   placeholder="Enter Password..."
+                  value={adminLoginPass}
+                  onChange={(e) => setAdminLoginPass(e.target.value)}
                 />
               </div>
               <div className="mt-3">
-                <button className="user-btn">Login</button>
+                <button className="user-btn" onClick={() => onLoginUser()}>
+                  Login
+                </button>
               </div>
             </div>
           </div>
