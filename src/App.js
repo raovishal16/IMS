@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import Header from './Components/Header/Header';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import Header from './Components/Header/Header';
 import Dashboard from './Components/Dashboard/Dashboard';
 import AddUser from './Components/ManageUser/AddUser';
 import ViewUser from './Components/ManageUser/ViewUser';
@@ -11,16 +11,24 @@ import ViewCourseContent from './Components/CourseContaent/ViewCourseContent';
 import AddStudent from './Components/Admission/AddStudent';
 import Login from './Components/Login/Login';
 import Register from './Components/Register/Register';
-import ProtectedRoutes from './Utils/ProtectedRoutes';
+import { useSelector } from 'react-redux';
+import { persistor } from './Store';
+import { PersistGate } from 'redux-persist/integration/react';
 function App() {
+  let auth = useSelector((state) => state.register.isAuthenticated)
+
+
+  console.log(auth, '+++++');
+
   return (
     <>
-      {/* <Header /> */}
-      <Routes>
-        <Route path='/register' element={<Register />} />
-        <Route path='/login' element={<Login />} />
+      <PersistGate loading={null} persistor={persistor} >
+        {
+          auth == false ? <></> : < Header />
+        }
 
-        <Route element={ProtectedRoutes}>
+        <Routes>
+
           <Route path='/' element={<Dashboard />} />
           <Route path='/user/adduser' element={<AddUser />} />
           <Route path='/user/viewuser' element={<ViewUser />} />
@@ -29,8 +37,13 @@ function App() {
           <Route path='/courceContent/addcource' element={<AddCourseConten />} />
           <Route path='/courceContent/viewcource' element={<ViewCourseContent />} />
           <Route path='/admission/addstudent' element={<AddStudent />} />
-        </Route>
-      </Routes>
+
+
+
+          <Route path='/register' element={<Register />} />
+          <Route path='/login' element={<Login />} />
+        </Routes>
+      </PersistGate>
 
     </>
   );

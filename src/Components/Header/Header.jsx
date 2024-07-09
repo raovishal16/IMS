@@ -5,11 +5,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaPowerOff } from "react-icons/fa";
 const Header = () => {
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
-  let gotoLogin = useNavigate();
+  let nav = useNavigate();
   const toggleSideBar = () => {
     setIsSideBarOpen(!isSideBarOpen);
   };
-
+  const gotoLogin = () => {
+    localStorage.removeItem("token");
+    nav("/login");
+  };
   return (
     <>
       <div className="container-fluid header-body bg-body-light border-bottom">
@@ -42,7 +45,7 @@ const Header = () => {
           </div>
           <div className="ms-auto pe-5">
             <div className="login">
-              <FaPowerOff onClick={() => gotoLogin("/login")} />
+              <FaPowerOff onClick={() => gotoLogin()} />
             </div>
           </div>
         </nav>

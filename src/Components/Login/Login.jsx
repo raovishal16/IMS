@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./login.css";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../Utils/Slice";
 const Login = () => {
   let [adminLoginEmail, setAdminLoginEmail] = useState("");
   let [adminLoginPass, setAdminLoginPass] = useState("");
@@ -9,18 +10,26 @@ const Login = () => {
     admin_email: adminLoginEmail,
     admin_pass: adminLoginPass,
   };
-  let nav = useNavigate();
+  let dispatch = useDispatch();
+  let navigate = useNavigate();
   const onLoginUser = () => {
-    axios
-      .post("http://localhost:3000/auth/admin_login", adminLoginData)
-      .then(function (response) {
-        // console.log(response.data.token, "++++");
-        localStorage.setItem("token", JSON.stringify(response.data.token));
-        nav("/");
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    // axios
+    //   .post("http://localhost:3000/auth/admin_login", adminLoginData)
+    //   .then(function (response) {
+    //     // console.log(response.data.token, "++++");
+    //     localStorage.setItem("token", JSON.stringify(response.data.token));
+    //     if (response.data.status === 200) {
+    //       navigate("/");
+    //     }
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
+    dispatch(loginUser(adminLoginData)).then((action) => {
+      if (action.type === "login/loginUser/fulfilled") {
+        navigate("/");
+      }
+    });
   };
   return (
     <>
@@ -56,7 +65,7 @@ const Login = () => {
                 />
               </div>
               <div className="mt-3">
-                <button className="user-btn" onClick={() => onLoginUser()}>
+                <button className="user-btn" onClick={onLoginUser}>
                   Login
                 </button>
               </div>

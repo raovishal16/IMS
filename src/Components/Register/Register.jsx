@@ -1,41 +1,35 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import "./register.css";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser } from "../../Utils/Slice";
 import { Link, useNavigate } from "react-router-dom";
+import "./register.css";
+
 const Register = () => {
   let [adminName, setAdminName] = useState("");
   let [adminEmail, setAdminEmail] = useState("");
   let [adminPass, setAdminPass] = useState("");
   let [adminContact, setAdminContact] = useState("");
   let [isShow, setIsShow] = useState(false);
-  let [adminRegisterData, setAdminRegisterData] = useState([]);
-  let admin_data = {
-    admin_name: adminName,
-    admin_email: adminEmail,
-    admin_pass: adminPass,
-    contact: adminContact,
-  };
-  let nav = useNavigate();
+  const dispatch = useDispatch();
+  const nav = useNavigate();
+
   const onShowPsw = () => {
     setIsShow(!isShow);
   };
 
   const onAddAdmin = () => {
-    axios
-      .post("http://localhost:3000/auth/register", admin_data)
-      .then(function (response) {
-        // console.log(response.data.admin_name, "++++");
-        // localStorage.setItem(
-        //   "admin_name",
-        //   JSON.stringify(response.data.admin_name)
-        // );
-        setAdminRegisterData([...adminRegisterData, response.data]);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    console.log(adminRegisterData, "++++++");
-    nav("/login");
+    const admin_data = {
+      admin_name: adminName,
+      admin_email: adminEmail,
+      admin_pass: adminPass,
+      contact: adminContact,
+    };
+
+    dispatch(registerUser(admin_data)).then((action) => {
+      if (action.type === "register/registerUser/fulfilled") {
+        nav("/login");
+      }
+    });
   };
 
   return (
@@ -109,7 +103,7 @@ const Register = () => {
                 />
               </div>
               <div className="mt-3 d-flex justify-content-center w-100">
-                <button className="user-btn" onClick={() => onAddAdmin()}>
+                <button className="user-btn" onClick={onAddAdmin}>
                   Register
                 </button>
               </div>
