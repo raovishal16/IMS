@@ -1,6 +1,6 @@
 .sidemenu {
   position: fixed;
-  top: 56px;
+  /* top: 56px; */
   left: 0;
   background-color: #f8f9fa;
   width: 14%;
@@ -28,6 +28,8 @@
 
 .username p {
   color: #333;
+  font-size: 20px;
+  text-transform: uppercase;
 }
 .sider-menu {
   padding: 5px 20px;

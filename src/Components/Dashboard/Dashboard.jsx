@@ -1,9 +1,8 @@
 import React from "react";
 import "./dash.css";
 import PathofCrumb from "../Navigate/PathofCrumb";
-// import Header from '../Header/Header'
+
 const Dashboard = () => {
-  
   return (
     <>
       {/* <Header/> */}

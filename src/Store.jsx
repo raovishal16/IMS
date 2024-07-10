@@ -1,20 +1,26 @@
-import { configureStore } from "@reduxjs/toolkit";
-import registerReducer from "./Utils/Slice";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import { combineReducers } from "@reduxjs/toolkit";
+import registerReducer from "./Utils/Slice";
+import branchReducer from "./Utils/BranchSlice";
 
 const persistConfig = {
   key: "root",
   storage,
+  whitelist: ["register", "branch"],
 };
 
 const rootReducer = combineReducers({
-  register: persistReducer(persistConfig, registerReducer),
+  register: registerReducer,
+  branch: branchReducer,
 });
 
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 const store = configureStore({
-  reducer: rootReducer,
+  reducer: persistedReducer,
 });
+
 const persistor = persistStore(store);
+
 export { store, persistor };

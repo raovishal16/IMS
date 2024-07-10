@@ -5,13 +5,17 @@ import { IoClose, IoHardwareChipSharp, IoSnowSharp } from "react-icons/io5";
 import { AiOutlineDashboard } from "react-icons/ai";
 import { FaUserTie, FaUserGraduate, FaPlus, FaEye } from "react-icons/fa";
 import { Link } from "react-router-dom";
-
+import { useSelector } from "react-redux";
+import { FaUserAlt } from "react-icons/fa";
 const SideBarMenu = ({ onClose, isOpen }) => {
   const [isManageUserOpen, setIsManageUserOpen] = useState(false);
   const [isManageCource, setIsManageCource] = useState(false);
   const [isCourceContent, setCourceContent] = useState(false);
   const [isAdmissionStudent, setStudents] = useState(false);
   const [activeItem, setActiveItem] = useState("");
+
+  let data = useSelector((state) => state.register.adminRegisterData);
+  // console.log(data, "*-*-");
 
   const toggleManageUser = () => {
     setIsManageUserOpen(!isManageUserOpen);
@@ -49,7 +53,7 @@ const SideBarMenu = ({ onClose, isOpen }) => {
           />
         </div>
         <div className="username">
-          <p className="h-4 mb-0 fw-semibold">User</p>
+          <p className="h-4 mb-0 fw-semibold">{data[0].admin_name}</p>
         </div>
       </div>
 
