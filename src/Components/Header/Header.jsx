@@ -9,7 +9,6 @@ import { FaLocationDot } from "react-icons/fa6";
 import { logout } from "../../Utils/Slice";
 const Header = () => {
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
   let adminToken = useSelector((state) => state.register.adminLoginToken);
 
   let nav = useNavigate();
@@ -67,11 +66,7 @@ const Header = () => {
 
       <div className={`container-fluid`}>
         <div className="row">
-          <div
-            className={`col-lg-3 ${
-              isSideBarOpen ? "" : "d-none d-lg-block"
-            } , ${isPopupOpen ? "z-n1" : "z-3"}`}
-          >
+          <div className="col-lg-3 d-none d-lg-block">
             <SideBarMenu />
           </div>
         </div>
