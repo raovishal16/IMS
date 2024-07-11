@@ -6,10 +6,11 @@ import { FaPowerOff } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { FaLocationDot } from "react-icons/fa6";
 // import { branchNameAdd } from "../../Utils/BranchSlice";
-
+import { logout } from "../../Utils/Slice";
 const Header = () => {
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  let adminToken = useSelector((state) => state.register.adminLoginToken);
 
   let nav = useNavigate();
   let dispatch = useDispatch();
@@ -19,7 +20,10 @@ const Header = () => {
   };
 
   const gotoLogin = () => {
-    localStorage.removeItem("token");
+    // localStorage.removeItem("token");
+    // nav("/login");
+    // console.log(adminToken, "dele");
+    dispatch(logout());
     nav("/login");
   };
 
