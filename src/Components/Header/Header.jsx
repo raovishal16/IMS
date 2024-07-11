@@ -1,4 +1,3 @@
-// Header.jsx
 import React, { useState } from "react";
 import "./Header.css";
 import SideBarMenu from "./SideBarMenu";
@@ -6,14 +5,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaPowerOff } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { FaLocationDot } from "react-icons/fa6";
-import Popup from "../BranchPopup/Popup";
-import { branchNameAdd } from "../../Utils/BranchSlice";
+// import { branchNameAdd } from "../../Utils/BranchSlice";
 
 const Header = () => {
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const branchName = useSelector((state) => state.branch.BranchName);
-  console.log(branchName, "/+/+/+/");
 
   let nav = useNavigate();
   let dispatch = useDispatch();
@@ -25,21 +21,6 @@ const Header = () => {
   const gotoLogin = () => {
     localStorage.removeItem("token");
     nav("/login");
-  };
-
-  const openTheBranch = () => {
-    setIsPopupOpen(true);
-  };
-
-  const saveBranchName = (name) => {
-    let branch = {
-      name: name,
-    };
-    dispatch(branchNameAdd(branch)).then((action) => {
-      if (action.type === "branch/branchAdd/fulfilled") {
-        console.log(branch, "Branch added successfully");
-      }
-    });
   };
 
   return (
@@ -73,19 +54,13 @@ const Header = () => {
             <Link className="nav-link fw-semibold">Contact</Link>
           </div>
           <div className="ms-auto d-flex align-items-center gap-4 pe-5">
-            <div className="login d-flex align-items-center gap-2">
-              <FaLocationDot onClick={openTheBranch} />
-              <span className="badge text-bg-warning">{branchName.name}</span>
-            </div>
             <div className="login">
               <FaPowerOff onClick={gotoLogin} />
             </div>
           </div>
         </nav>
       </div>
-      {isPopupOpen && (
-        <Popup onClose={() => setIsPopupOpen(false)} onSave={saveBranchName} />
-      )}
+
       <div className={`container-fluid`}>
         <div className="row">
           <div

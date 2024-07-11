@@ -7,12 +7,12 @@ import branchReducer from "./Utils/BranchSlice";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["register", "branch"],
+  whitelist: ["register"],
 };
 
 const rootReducer = combineReducers({
   register: registerReducer,
-  branch: branchReducer,
+  // branch: branchReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

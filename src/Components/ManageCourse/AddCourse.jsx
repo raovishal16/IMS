@@ -1,6 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import PathofCrumb from "../Navigate/PathofCrumb";
+import axios from "axios";
+import { useSelector } from "react-redux";
 const AddCourse = () => {
+  let [course, setCourse] = useState("");
+  let [courseList, setCourseList] = useState([]);
+  let addCourse = {
+    name: course,
+  };
+  let token = useSelector((state) => state.register.adminLoginToken);
+  const onAddCourse = () => {
+    axios
+      .post("http://localhost:3000/course/course", addCourse, {
+        headers: {
+          authorization: `${token}`,
+        },
+      })
+      .then(function (response) {
+        console.log(response.data.data);
+        setCourseList((preCourse) => [...preCourse, response.data.data]);
+        localStorage.setItem("course", JSON.stringify(courseList));
+        setCourse("");
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+      .finally(function () {});
+  };
+
   return (
     <>
       <div className="dashboard">
@@ -21,10 +48,14 @@ const AddCourse = () => {
                   type="text"
                   className="form-control"
                   placeholder="Course Name..."
+                  value={course}
+                  onChange={(e) => setCourse(e.target.value)}
                 />
               </div>
               <div className="d-flex justify-content-center">
-                <button className="user-btn">Add Course</button>
+                <button className="user-btn" onClick={() => onAddCourse()}>
+                  Add Course
+                </button>
               </div>
             </div>
           </div>
