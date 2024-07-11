@@ -1,0 +1,64 @@
+import React from "react";
+import PathofCrumb from "../Navigate/PathofCrumb";
+import axios from "axios";
+import { CiEdit } from "react-icons/ci";
+import { MdDelete } from "react-icons/md";
+import { useSelector } from "react-redux";
+const ViewRole = () => {
+  let role = JSON.parse(localStorage.getItem("role"));
+  console.log(role, "+++");
+  const token = useSelector((state) => state.register.adminLoginToken);
+  return (
+    <>
+      <div className="dashboard">
+        <div>
+          <PathofCrumb name="View Branch" crumb="View Branch" />
+        </div>
+        <div className="adduser d-flex justify-content-center align-items-center w-100">
+          <div className="view-card  border-0">
+            <div className="addusercard-title text-center fw-bold">
+              All Branch
+            </div>
+            <div className="addcourse-card-body">
+              <div className="view-card-body my-4">
+                <table className="table table-sm">
+                  <thead>
+                    <tr>
+                      <th scope="col">No</th>
+                      <th scope="col">Role</th>
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {role?.map((item, index) => {
+                      return (
+                        <>
+                          <tr>
+                            <th key={index}>{index + 1}</th>
+                            <td className="text-semibold">{item?.name}</td>
+                            <td>
+                              <div className="d-flex align-items-center  gap-2">
+                                <div className="btn btn-primary">
+                                  <CiEdit />
+                                </div>
+                                <div className="btn btn-danger">
+                                  <MdDelete />
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        </>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default ViewRole;

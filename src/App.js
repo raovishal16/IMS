@@ -16,6 +16,8 @@ import { persistor } from './Store';
 import { PersistGate } from 'redux-persist/integration/react';
 import Branch from './Components/Branch/Branch';
 import ViewBranch from './Components/Branch/ViewBranch';
+import Role from './Components/Role/Role';
+import ViewRole from './Components/Role/ViewRole';
 
 function App() {
   let auth = useSelector((state) => state.register.isAuthenticated);
@@ -44,6 +46,8 @@ function App() {
               <Route path='/admission/addstudent' element={<AddStudent />} />
               <Route path='branch/addbranch' element={<Branch />} />
               <Route path='branch/viewbranch' element={<ViewBranch />} />
+              <Route path='role/addrole' element={<Role />} />
+              <Route path='role/viewrole' element={<ViewRole />} />
             </>
           )}
         </Routes>

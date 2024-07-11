@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { FaUserAlt } from "react-icons/fa";
 import { FaCodeBranch } from "react-icons/fa";
+import { IoMdHelp } from "react-icons/io";
 
 const SideBarMenu = ({ onClose, isOpen }) => {
   const [isManageUserOpen, setIsManageUserOpen] = useState(false);
@@ -15,6 +16,7 @@ const SideBarMenu = ({ onClose, isOpen }) => {
   const [isCourceContent, setCourceContent] = useState(false);
   const [isAdmissionStudent, setStudents] = useState(false);
   const [branch, setBranch] = useState(false);
+  const [role, setRole] = useState(false);
   const [activeItem, setActiveItem] = useState("");
 
   let data = useSelector((state) => state.register.adminRegisterData);
@@ -39,6 +41,10 @@ const SideBarMenu = ({ onClose, isOpen }) => {
   const toggleBranch = () => {
     setBranch(!branch);
     setActiveItem("branch");
+  };
+  const togggleRole = () => {
+    setRole(!role);
+    setActiveItem("role");
   };
 
   const handleDashboardClick = () => {
@@ -276,6 +282,47 @@ const SideBarMenu = ({ onClose, isOpen }) => {
                     <FaEye />
                     <Link to="/branch/viewbranch" className="nav-link">
                       View branch
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            )}
+          </div>
+          <div>
+            <li
+              className={`d-flex gap-2 align-items-center  w-100 ${
+                activeItem === "role" && "active"
+              }`}
+              onClick={togggleRole}
+            >
+              <div className="d-flex align-items-center gap-2 w-100">
+                <IoMdHelp />
+                <span className="nav-link mb-0 ml-2">Role</span>
+              </div>
+            </li>
+            {role && (
+              <div className="user-petamenu">
+                <ul>
+                  <li
+                    className={`d-flex align-items-center w-100 gap-2 ${
+                      activeItem === "addrole" && "active"
+                    }`}
+                    onClick={() => setActiveItem("addrole")}
+                  >
+                    <FaPlus />
+                    <Link to="/role/addrole" className="nav-link">
+                      Add role
+                    </Link>
+                  </li>
+                  <li
+                    className={`d-flex align-items-center w-100 gap-2 ${
+                      activeItem === "viewrole" && "active"
+                    }`}
+                    onClick={() => setActiveItem("viewrole")}
+                  >
+                    <FaEye />
+                    <Link to="/role/viewrole" className="nav-link">
+                      View role
                     </Link>
                   </li>
                 </ul>
