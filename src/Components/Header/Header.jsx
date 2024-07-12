@@ -19,9 +19,6 @@ const Header = () => {
   };
 
   const gotoLogin = () => {
-    // localStorage.removeItem("token");
-    // nav("/login");
-    // console.log(adminToken, "dele");
     dispatch(logout());
     nav("/login");
   };

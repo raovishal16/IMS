@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import PathofCrumb from "../Navigate/PathofCrumb";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addBranchList } from "../../Utils/BranchSlice";
 
 const Branch = () => {
   const [branch, setBranch] = useState("");
@@ -9,11 +10,7 @@ const Branch = () => {
 
   const token = useSelector((state) => state.register.adminLoginToken);
   //   console.log(token, '"token"');
-
-  useEffect(() => {
-    localStorage.setItem("branch", JSON.stringify(viewBranch));
-  }, []);
-
+  let dispatch = useDispatch();
   const add_branch = {
     name: branch,
   };
@@ -26,11 +23,28 @@ const Branch = () => {
         },
       })
       .then((response) => {
-        setViewBranch((prevViewBranch) => [
-          ...prevViewBranch,
-          response.data.data,
-        ]);
+        setViewBranch([...viewBranch, response.data.data]);
+        dispatch(addBranchList(response.data.data));
+        viewBranchData();
+
         setBranch("");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const viewBranchData = () => {
+    axios
+      .get("http://localhost:3000/branch/view_branch", {
+        headers: {
+          authorization: `${token}`,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        dispatch(addBranchList(response.data));
+        // console.log(addBranchList, "9999");
       })
       .catch((error) => {
         console.log(error);
