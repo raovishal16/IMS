@@ -14,6 +14,9 @@ const Branch = () => {
   const add_branch = {
     name: branch,
   };
+  useEffect(() => {
+    viewBranchData();
+  }, []);
 
   const onAddBranch = () => {
     axios
@@ -24,7 +27,7 @@ const Branch = () => {
       })
       .then((response) => {
         setViewBranch([...viewBranch, response.data.data]);
-        dispatch(addBranchList(response.data.data));
+        // dispatch(addBranchList(response.data.data));
         viewBranchData();
 
         setBranch("");

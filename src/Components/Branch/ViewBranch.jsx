@@ -10,7 +10,7 @@ import BranchEditPopup from "./BranchEditPopup";
 const ViewBranch = () => {
   const dispatch = useDispatch();
   const branchData = useSelector((state) => state.branch.branchList.data);
-  const [branch, setBranch] = useState(branchData);
+  const [branch, setBranch] = useState();
   const [popup, setPopup] = useState(false);
   const [selectedBranch, setSelectedBranch] = useState(null);
   const token = useSelector((state) => state.register.adminLoginToken);
