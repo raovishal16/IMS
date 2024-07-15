@@ -1,7 +1,10 @@
 import React from "react";
 import PathofCrumb from "../Navigate/PathofCrumb";
+import { useSelector } from "react-redux";
 
 const ViewCourse = () => {
+  let CourseData = useSelector((state) => state.course.course.data);
+  console.log(CourseData, "course");
   return (
     <>
       <div className="dashboard">
@@ -23,17 +26,19 @@ const ViewCourse = () => {
                       <th scope="col">Action</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>Flutter Devloper</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>
-                        <td>Reacft js</td>
-                      </td>
-                    </tr>
+                  <tbody className="table-group-divider">
+                    {CourseData.map((item, index) => {
+                      return (
+                        <>
+                          <tr key={index}>
+                            <th className="fw-semibold">{index + 1}</th>
+                            <td className="fw-semibold text-uppercase">
+                              {item.name}
+                            </td>
+                          </tr>
+                        </>
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>

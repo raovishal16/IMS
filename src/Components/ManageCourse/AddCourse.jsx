@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PathofCrumb from "../Navigate/PathofCrumb";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addCourseList } from "../../Utils/CourseSlice";
 const AddCourse = () => {
   let [course, setCourse] = useState("");
-  let [courseList, setCourseList] = useState([]);
+  const dispatch = useDispatch();
   let addCourse = {
     name: course,
   };
+  useEffect(() => {
+    viewCourse();
+  }, []);
   let token = useSelector((state) => state.register.adminLoginToken);
   const onAddCourse = () => {
     axios
@@ -18,14 +22,27 @@ const AddCourse = () => {
       })
       .then(function (response) {
         console.log(response.data.data);
-        setCourseList((preCourse) => [...preCourse, response.data.data]);
-        localStorage.setItem("course", JSON.stringify(courseList));
+        viewCourse();
         setCourse("");
       })
       .catch(function (error) {
         console.log(error);
       })
       .finally(function () {});
+  };
+
+  const viewCourse = () => {
+    axios
+      .get("http://localhost:3000/course/view_course", {
+        headers: { authorization: `${token}` },
+      })
+      .then((response) => {
+        console.log(response.data, "///");
+        dispatch(addCourseList(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (

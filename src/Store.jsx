@@ -4,6 +4,7 @@ import storage from "redux-persist/lib/storage";
 import registerReducer from "./Utils/Slice";
 import branchReducer from "./Utils/BranchSlice";
 import roleReducer from "./Utils/RoleSlice";
+import courseReducer from "./Utils/CourseSlice";
 const persistConfig = {
   key: "root",
   storage,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   register: registerReducer,
   branch: branchReducer,
   role: roleReducer,
+  course: courseReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
