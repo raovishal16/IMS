@@ -1,6 +1,10 @@
 .header-body {
   background-color: #f0f0f0;
   background-image: linear-gradient(135deg, #f0f0f0, #ffffff);
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 99;
 }
 
 .logoimg {
@@ -23,11 +27,7 @@
   font-size: 14px;
 }
 
-.header-body {
-  position: sticky;
-  top: 0;
-  left: 0;
-}
+
 .badge {
   letter-spacing: 0.2px;
   text-transform: uppercase;

@@ -18,6 +18,12 @@ import Branch from './Components/Branch/Branch';
 import ViewBranch from './Components/Branch/ViewBranch';
 import Role from './Components/Role/Role';
 import ViewRole from './Components/Role/ViewRole';
+import Inq from './Components/Inq/Inq';
+import ViewInq from './Components/Inq/ViewInq';
+import Ref from './Components/Ref/Ref';
+import ViewRef from './Components/Ref/ViewRef';
+import Status from './Components/Status/Status';
+import ViewSataus from './Components/Status/ViewSataus';
 
 function App() {
   let auth = useSelector((state) => state.register.isAuthenticated);
@@ -48,6 +54,13 @@ function App() {
               <Route path='branch/viewbranch' element={<ViewBranch />} />
               <Route path='role/addrole' element={<Role />} />
               <Route path='role/viewrole' element={<ViewRole />} />
+              <Route path='inq/addinq' element={<Inq />} />
+              <Route path='inq/viewinq' element={<ViewInq />} />
+              <Route path='ref/addref' element={<Ref />} />
+              <Route path='ref/viewref' element={<ViewRef />} />
+              <Route path='status/addstatus' element={<Status />} />
+              <Route path='status/viewstatus' element={<ViewSataus />} />
+              
             </>
           )}
         </Routes>

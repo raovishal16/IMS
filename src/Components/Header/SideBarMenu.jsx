@@ -9,7 +9,8 @@ import { useSelector } from "react-redux";
 import { FaUserAlt } from "react-icons/fa";
 import { FaCodeBranch } from "react-icons/fa";
 import { IoMdHelp } from "react-icons/io";
-
+import { MdOutlineEmojiObjects ,MdOutlineMobileFriendly } from "react-icons/md";
+import { GrStatusGood } from "react-icons/gr";
 const SideBarMenu = ({ onClose, isOpen }) => {
   const [isManageUserOpen, setIsManageUserOpen] = useState(false);
   const [isManageCource, setIsManageCource] = useState(false);
@@ -17,6 +18,9 @@ const SideBarMenu = ({ onClose, isOpen }) => {
   const [isAdmissionStudent, setStudents] = useState(false);
   const [branch, setBranch] = useState(false);
   const [role, setRole] = useState(false);
+  const [inq, setInq] = useState(false);
+  const [ref, setRef] = useState(false);
+  const [status, setStatus] = useState(false);
   const [activeItem, setActiveItem] = useState("");
 
   let data = useSelector((state) => state.register.adminRegisterData);
@@ -45,6 +49,18 @@ const SideBarMenu = ({ onClose, isOpen }) => {
   const togggleRole = () => {
     setRole(!role);
     setActiveItem("role");
+  };
+  const togggleInq = () => {
+    setInq(!inq);
+    setActiveItem("role");
+  };
+  const togggleRef = () => {
+    setRef(!ref);
+    setActiveItem("ref");
+  };
+  const toggleStatus = () => {
+    setStatus(!status);
+    setActiveItem("status");
   };
 
   const handleDashboardClick = () => {
@@ -323,6 +339,129 @@ const SideBarMenu = ({ onClose, isOpen }) => {
                     <FaEye />
                     <Link to="/role/viewrole" className="nav-link">
                       View role
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            )}
+          </div>
+          <div>
+            <li
+              className={`d-flex gap-2 align-items-center  w-100 ${
+                activeItem === "inq" && "active"
+              }`}
+              onClick={togggleInq}
+            >
+              <div className="d-flex align-items-center gap-2 w-100">
+                <MdOutlineEmojiObjects />
+                <span className="nav-link mb-0 ml-2">Inquiry</span>
+              </div>
+            </li>
+            {inq && (
+              <div className="user-petamenu">
+                <ul>
+                  <li
+                    className={`d-flex align-items-center w-100 gap-2 ${
+                      activeItem === "addinq" && "active"
+                    }`}
+                    onClick={() => setActiveItem("addinq")}
+                  >
+                    <FaPlus />
+                    <Link to="/inq/addinq" className="nav-link">
+                      Add Inquiry
+                    </Link>
+                  </li>
+                  <li
+                    className={`d-flex align-items-center w-100 gap-2 ${
+                      activeItem === "viewinq" && "active"
+                    }`}
+                    onClick={() => setActiveItem("viewinq")}
+                  >
+                    <FaEye />
+                    <Link to="/inq/viewinq" className="nav-link">
+                      View Inquiry
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            )}
+          </div>
+          <div>
+            <li
+              className={`d-flex gap-2 align-items-center  w-100 ${
+                activeItem === "ref" && "active"
+              }`}
+              onClick={togggleRef}
+            >
+              <div className="d-flex align-items-center gap-2 w-100">
+                <MdOutlineMobileFriendly />
+                <span className="nav-link mb-0 ml-2">reference</span>
+              </div>
+            </li>
+            {ref && (
+              <div className="user-petamenu">
+                <ul>
+                  <li
+                    className={`d-flex align-items-center w-100 gap-2 ${
+                      activeItem === "addref" && "active"
+                    }`}
+                    onClick={() => setActiveItem("addref")}
+                  >
+                    <FaPlus />
+                    <Link to="/ref/addref" className="nav-link">
+                      Add Reference
+                    </Link>
+                  </li>
+                  <li
+                    className={`d-flex align-items-center w-100 gap-2 ${
+                      activeItem === "viewref" && "active"
+                    }`}
+                    onClick={() => setActiveItem("viewref")}
+                  >
+                    <FaEye />
+                    <Link to="/ref/viewref" className="nav-link">
+                      View Reference
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            )}
+          </div>
+          <div>
+            <li
+              className={`d-flex gap-2 align-items-center  w-100 ${
+                activeItem === "status" && "active"
+              }`}
+              onClick={toggleStatus}
+            >
+              <div className="d-flex align-items-center gap-2 w-100">
+                <GrStatusGood />
+                <span className="nav-link mb-0 ml-2">Status</span>
+              </div>
+            </li>
+            {status && (
+              <div className="user-petamenu">
+                <ul>
+                  <li
+                    className={`d-flex align-items-center w-100 gap-2 ${
+                      activeItem === "addstatus" && "active"
+                    }`}
+                    onClick={() => setActiveItem("addstatus")}
+                  >
+                    <FaPlus />
+                    <Link to="/status/addStatus" className="nav-link">
+                      Add Status
+                    </Link>
+                  </li>
+                  <li
+                    className={`d-flex align-items-center w-100 gap-2 ${
+                      activeItem === "viewstatus" && "active"
+                    }`}
+                    onClick={() => setActiveItem("viewstatus")}
+                  >
+                    <FaEye />
+                    <Link to="/status/viewstatus" className="nav-link">
+                      View Status
                     </Link>
                   </li>
                 </ul>

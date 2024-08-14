@@ -5,6 +5,9 @@ import registerReducer from "./Utils/Slice";
 import branchReducer from "./Utils/BranchSlice";
 import roleReducer from "./Utils/RoleSlice";
 import courseReducer from "./Utils/CourseSlice";
+import RefReducer from "./Utils/RefSlice";
+import Statusreducer from "./Utils/statusSlice";
+import inqReducer from './Utils/InqSlice'
 const persistConfig = {
   key: "root",
   storage,
@@ -16,6 +19,9 @@ const rootReducer = combineReducers({
   branch: branchReducer,
   role: roleReducer,
   course: courseReducer,
+  reference:RefReducer,
+  status:Statusreducer,
+  inq:inqReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
